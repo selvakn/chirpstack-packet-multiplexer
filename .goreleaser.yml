@@ -23,20 +23,24 @@ builds:
 release:
   disable: true
 
-nfpm:
-  vendor: ChirpStack
-  homepage: https://www.chirpstack.io/
-  maintainer: Orne Brocaar <info@brocaar.com>
-  description: ChirpStack Packet Multiplexer
-  license: MIT
-  formats:
+nfpms:
+  -
+    vendor: ChirpStack
+    homepage: https://www.chirpstack.io/
+    maintainer: Orne Brocaar <info@brocaar.com>
+    description: ChirpStack Packet Multiplexer
+    license: MIT
+    formats:
     - deb
-  bindir: /usr/bin
-  files:
-    "packaging/files/chirpstack-packet-multiplexer.rotate": "/etc/logrotate.d/chirpstack-packet-multiplexer"
-    "packaging/files/chirpstack-packet-multiplexer.init": "/usr/lib/chirpstack-packet-multiplexer/scripts/chirpstack-packet-multiplexer.init"
-    "packaging/files/chirpstack-packet-multiplexer.service": "/usr/lib/chirpstack-packet-multiplexer/scripts/chirpstack-packet-multiplexer.service"
-  scripts:
-    preinstall: "packaging/scripts/pre-install.sh"
-    postinstall: "packaging/scripts/post-install.sh"
-    postremove: "packaging/scripts/post-remove.sh"
+    bindir: /usr/bin
+    contents:
+      - src: packaging/files/chirpstack-packet-multiplexer.rotate
+        dst: /etc/logrotate.d/chirpstack-packet-multiplexer
+      - src: packaging/files/chirpstack-packet-multiplexer.init
+        dst: /usr/lib/chirpstack-packet-multiplexer/scripts/chirpstack-packet-multiplexer.init
+      - src: packaging/files/chirpstack-packet-multiplexer.service
+        dst: /usr/lib/chirpstack-packet-multiplexer/scripts/chirpstack-packet-multiplexer.service
+    scripts:
+      preinstall: "packaging/scripts/pre-install.sh"
+      postinstall: "packaging/scripts/post-install.sh"
+      postremove: "packaging/scripts/post-remove.sh"
